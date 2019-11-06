@@ -1,0 +1,61 @@
+
+<div id="usage_policy" style="display: none">
+  <h3>T3 Data Usage Policy</h3>
+  <p>
+    In 2009 the Toronto International Data Release Workshop agreed on a policy statement about prepublication data sharing. 
+    Accordingly, the data producers are making many of the datasets in T3 available prior to publication of a global analysis. 
+    Guidelines for appropriate sharing of these data are given in the excerpt from the Toronto Statement.
+  </p>
+  <p>
+    More information is available on the <a href="/usage_policy">data usage policy</a> page.
+  </p>
+  <p>
+    I agree to the Data Usage Policy as specified in Toronto Statement.
+  </p>
+</div>
+
+<style type="text/css">
+  .no-close .ui-dialog-titlebar-close { 
+    display: none;
+}
+</style>
+
+<script>
+
+  jQuery(function() {
+    jQuery( '#usage_policy' ).dialog( { 
+      modal: true,
+      title: "Please Note: Website Data Usage Policy",
+      width:500, 
+      closeOnEscape: false,
+      dialogClass: "no-close",
+      autoOpen: false,
+  buttons: { 
+        "Don't agree": function() { document.location.href="http://google.com"; } , 
+        "Agree": function() { jQuery.cookie("website_usage_policy_approved", "1", { expires: 10000 } ); jQuery(this).dialog("close") } 
+}
+    });
+  });
+
+
+  if (jQuery.cookie("website_usage_policy_approved") == 1) { 
+    // document.write('You have already accepted the <a href="/usage_policy">website usage policy</a>. Thank you.<br />');
+  }
+
+  window.onload=function() { 
+    var cookie = jQuery.cookie("website_usage_policy_approved");
+  //alert("have cookie: "+cookie);
+ 
+    if (cookie == undefined) {
+    //  alert("showing!");
+      jQuery('#usage_policy').dialog("open");
+  //alert("Done!");
+    } 
+    else { 
+      //alert("Hiding!");
+      jQuery('#usage_policy').dialog("close");
+  
+    }
+  }
+
+</script>

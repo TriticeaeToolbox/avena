@@ -1,0 +1,67 @@
+<%doc>
+
+=head1 NAME
+
+/cview/index.mas - a mason component to show information about available maps.
+
+=head1 DESCRIPTION
+
+A Mason component that displays an html page with links to all SGN maps and related information. 
+
+Required parameters:
+
+=over 2
+
+$map_by_species - a hashref with map information to display
+
+$default_map_id - the map_id of the map to be displayed by default
+
+=back
+
+=head1 AUTHOR
+
+Initial version by Robert Ahrens, later maintained by John Binns.
+
+Mason version by Lukas Mueller <lam87@cornell.edu>
+
+February 2010
+
+Refactored for Catalyst Feb 2011
+
+=cut
+
+</%doc>
+
+<%args>
+$map_by_species
+$map_url
+$chr_url
+$comp_maps_url
+$default_map_id => 32 
+
+</%args>
+
+<& /page/page_title.mas, title=>"Available Maps" &>
+<div class="container-fluid">
+
+<%perl>
+# Show a blue section html with the system maps
+# organized by species.
+#
+my $d ='';
+foreach my $s (sort { @{$map_by_species->{$a}} <=> @{$map_by_species->{$b}} } keys %$map_by_species) {
+  $d .= "<h3>$s Maps</h3>";
+  $d .= join('<br />' ,  sort @{ $map_by_species->{$s} } );
+  $d .= "<br /><br />";
+}
+
+my $submit = qq | <b>[<a href="/cview/help/map_submission">Submit New Map</a>]</b> |;
+
+</%perl>
+
+<br /><br />
+<% $d %>
+
+
+
+</div>
