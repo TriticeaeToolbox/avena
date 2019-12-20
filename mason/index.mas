@@ -45,7 +45,7 @@ $show_accept_dialog => undef
 
     <!-- INTRO -->
 
-    <h1>Welcome to the New T3/Wheat</h1>
+    <h1>Welcome to the New T3/Oat</h1>
 
     <br />
 
@@ -68,7 +68,7 @@ $show_accept_dialog => undef
         Leave Feedback
     </a>
     <p>
-        The <strong>New T3</strong> is the next evolution of <strong>The Triticeae Toolbox (<a href="https://triticeaetoolbox.org/wheat/">T3</a>)</strong>.  We 
+        The <strong>New T3</strong> is the next evolution of <strong>The Triticeae Toolbox (<a href="https://triticeaetoolbox.org/oat/">T3</a>)</strong>.  We 
         are in the process of transitioning all of T3's data and tools to this new system.  We encourage you to leave feedback about feature 
         improvements, missing tools, and/or any ideas you may have to improve the site.
     </p>
