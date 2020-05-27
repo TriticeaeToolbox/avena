@@ -66,6 +66,7 @@ $is_owner
             </li>
 % }
         </ul>
+        <& /stock/external_links.mas, stock_id => $stock_id &>
     </div>
 </div>
 
