@@ -1,0 +1,106 @@
+<%args>
+$stock_id
+</%args>
+
+
+<style>
+    #external-links-list {
+        list-style-type: none;
+    }
+</style>
+
+
+<div id="external-links">
+    <li id="external-links-list"></li>
+</div>
+
+
+<script defer>
+
+    /**
+     * EXTERNAL LINK DEFINITIONS
+     * Each website that can be used as an external link should be defined here
+     * as an object with the follow properties:
+     *     name: the name of the external website
+     *     prefixes: an array of the accession number prefixes that can be linked to this website
+     *     url: a function that accepts the full accession number (ex: PI 1234) and returns 
+     *         the URL for the page on the wesbite for the specific accession
+     * @type {Object[]}
+     */
+    const LINKS = [
+        {
+            name: "GRIN",
+            prefixes: ["PI", "CIav"],
+            url: function(term) {
+                return "https://npgsweb.ars-grin.gov/gringlobal/accessiondetail.aspx?accid=" + term;
+            }
+        },
+        {
+            name: "GRIN-CA",
+            prefixes: ["CIav", "CN", "PGR"],
+            url: function(term) {
+                return "https://pgrc3.agr.gc.ca/cgi-bin/npgs/html/acc_search.pl?accid=" + term
+            }
+        }
+    ]
+
+
+    /**
+     * on ready: get the stock props
+     */
+    jQuery(document).ready(function() {
+        getProps();
+    });
+
+
+    /**
+     * Get the stock props for the current stock id
+     */
+    function getProps() {
+      jQuery.ajax( {
+        type: 'GET',
+        url: '/stock/prop/get',
+        data: { stock_id: <% $stock_id %> },
+        success: function(response) { 
+            let props = [];
+            if ( response ) {
+                for ( let i = 0; i < response.length; i++ ) {
+                    if ( response[i].type_name === 'accession number' ) {
+                        props.push(response[i]);
+                    }
+                }
+            }
+            renderLinks(props);
+        },
+        error: function(response) { 
+            console.log("Could not load stock props");
+            console.log(response); 
+        }
+      });
+    }
+
+    /**
+     * Generate the external links HTML
+     * @param  {Object[]} props A list of accession number stock props
+     */
+    function renderLinks(props) {
+        let html = "";
+        for ( let i = 0; i < props.length; i++ ) {
+            let prop = props[i];
+            console.log(prop);
+            let accession_number = prop.value;
+            let prefix = accession_number.split(' ')[0];
+            for ( let j = 0; j < LINKS.length; j++ ) {
+                let link = LINKS[j];
+                if ( link.prefixes.includes(prefix) ) {
+                    html += "<ul>";
+                    html += "<a href='" + link.url(accession_number) + "'>"
+                    html += link.name + ': ' + accession_number;
+                    html += "</a>";
+                    html += "</ul>";
+                }
+            }
+        }
+        jQuery("#external-links-list").html(html);
+    }
+</script>
