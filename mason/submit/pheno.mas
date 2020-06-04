@@ -1,0 +1,19 @@
+<%args>
+</%args>
+
+
+<& /page/page_title.mas, title=>"Phenotype Data Submission" &>
+
+<div class="container">
+    <br /><br />
+    <p>
+        Go to the <a href='https://oat.triticeaetoolbox.org/submit/pheno'>Phenotype Submission Form on the production site</a>
+        to submit data files for curation.
+    </p>
+    <br /><br />
+</div>
+
+
+<script type="text/javascript">
+    window.location.replace("https://oat.triticeaetoolbox.org/submit/pheno");
+</script>
