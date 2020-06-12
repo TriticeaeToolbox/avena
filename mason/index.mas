@@ -24,14 +24,14 @@ $show_accept_dialog => undef
     a.btn-primary {
         color: #fff;
     }
+    a.btn-primary:hover {
+        background-color: #286090 !important;
+        color: #fff !important;
+    }
     .btn-home {
         float: right;
         margin: 5px 10px;
         width: 220px;
-    }
-    .btn-home:hover {
-        background-color: #286090 !important;
-        color: #fff !important;
     }
     .btn-search {
         margin: 5px 0;
@@ -274,7 +274,6 @@ $show_accept_dialog => undef
     <& /homepage/usage_popup.mas &>
 
 </div>
-
 
 
 <script type="text/javascript">
